@@ -16,6 +16,9 @@
     "cloudflare": {
       "type": "remote",
       "url": "https://mcp.cloudflare.com/mcp",
+      "headers": {
+        "Authorization": "Bearer {env:CLOUDFLARE_API_TOKEN}"
+      },
       "enabled": false
     },
     "mercadopago": {
@@ -26,6 +29,9 @@
     "resend": {
       "type": "remote",
       "url": "https://mcp.resend.com/mcp",
+      "headers": {
+        "Authorization": "Bearer {env:RESEND_API_KEY}"
+      },
       "enabled": false
     },
     "brevo": {
