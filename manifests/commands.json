@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "source": "ENDERSON-MARIN/agent-config",
+  "assets": {
+    "gbranch.md": {
+      "path": "commands/gbranch.md",
+      "computedHash": "f76e86005da1361c5c6288579fd5d4d95da0149974ccfc12a231dd1e1d2ae523"
+    },
+    "gcheck-updates.md": {
+      "path": "commands/gcheck-updates.md",
+      "computedHash": "d1b907207421d814fde241526fe6662cebf62a6f1f0f47569754417bbb1818c4"
+    },
+    "gcommit.md": {
+      "path": "commands/gcommit.md",
+      "computedHash": "e7a862f664ba41a354759122fe432621010bce54fe7853771c1e8744e0a0b66c"
+    },
+    "gpromote.md": {
+      "path": "commands/gpromote.md",
+      "computedHash": "7eafe1fb5fafd224b291fa38dd41419e2a48e7eb334572d7ee8edd309159a24e"
+    },
+    "gpull.md": {
+      "path": "commands/gpull.md",
+      "computedHash": "f0b0fdcbd73efbeecba4ad1bc5f04358eb2458180cc8572ba521160bf231cdd3"
+    },
+    "gpush.md": {
+      "path": "commands/gpush.md",
+      "computedHash": "cc640f8c1a7e3057cefec0d40fa7dced8a5ad4f7c891ab13583a79afe082938c"
+    },
+    "grequest.md": {
+      "path": "commands/grequest.md",
+      "computedHash": "e6fefabc96f4b7242a9b7c14bf7a2203214e8d165bd5e4b43cf167081a94bc97"
+    }
+  }
+}

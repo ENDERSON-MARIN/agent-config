@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "source": "ENDERSON-MARIN/agent-config",
+  "assets": {
+    "gbranch.prompt.md": {
+      "path": "prompts/gbranch.prompt.md",
+      "computedHash": "4657a2c27adf7d3b36033e9809986726f037c0b98040fde064cc6cff5209239f"
+    },
+    "gcommit.prompt.md": {
+      "path": "prompts/gcommit.prompt.md",
+      "computedHash": "de3e10359fa3751df386ce77199c604592acd7819048df0bf79650f99b72b039"
+    },
+    "gpull.prompt.md": {
+      "path": "prompts/gpull.prompt.md",
+      "computedHash": "f86281a5f7c567e6af71bf6aaabdafe1f200771b3735089c281a6aa2c8f73cfe"
+    },
+    "gpush.prompt.md": {
+      "path": "prompts/gpush.prompt.md",
+      "computedHash": "4d1d8b1895396bdb9f8b6737fe7837c49e5ee6b8887ad68b62c346a17b2867bb"
+    },
+    "grequest.prompt.md": {
+      "path": "prompts/grequest.prompt.md",
+      "computedHash": "54e992eb059d7dd29cb3c61e138ae752589ee745dc9cc43ec326915b1194276d"
+    }
+  }
+}

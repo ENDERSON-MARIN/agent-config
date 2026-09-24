@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "source": "ENDERSON-MARIN/agent-config",
+  "assets": {
+    "AGENTS.router.md": {
+      "path": "rules/AGENTS.router.md",
+      "computedHash": "90a8aa6e31627d732c771f96d3e2859abd04985704a1cad80d98199d9af3222c"
+    },
+    "general.template.md": {
+      "path": "rules/general.template.md",
+      "computedHash": "b7b810a59ffd5216b327403ff0698378cc887ec130adf346a52a25f7029e3b3d"
+    }
+  }
+}

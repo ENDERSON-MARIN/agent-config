@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "source": "ENDERSON-MARIN/agent-config",
+  "assets": {
+    "docs.md": {
+      "path": "agents/docs.md",
+      "computedHash": "86da8639a658b273dd2a251d29e2ac89e53eb7dd7e0647799c7509b7026500c6"
+    },
+    "ui-check.md": {
+      "path": "agents/ui-check.md",
+      "computedHash": "1c5e595778624f30daa1c2f541bb15f45e2e787c67d4cd01c1e5e24406dc2ca5"
+    }
+  }
+}

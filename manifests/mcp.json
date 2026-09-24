@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "source": "ENDERSON-MARIN/agent-config",
+  "assets": {
+    "base.opencode.json": {
+      "path": "mcp/base.opencode.json",
+      "computedHash": "ab4eed649e4fe82b1d544a9d17485b0c5c4a0b71f0d022178dc8ed4332211ef4"
+    },
+    "base.vscode.json": {
+      "path": "mcp/base.vscode.json",
+      "computedHash": "6d4b167127757350b4de1b24666d4e7491b376aadd04a357f6ce44bf3b92bb77"
+    }
+  }
+}

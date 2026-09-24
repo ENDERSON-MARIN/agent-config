@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "github-flow": {
+      "source": "ENDERSON-MARIN/agent-config",
+      "sourceType": "github",
+      "skillPath": "skills/github-flow/SKILL.md",
+      "computedHash": "2bb07d7a1b4742828a0f8290feb2466611e83611d8a8457333a44a1c99cb8d15"
+    }
+  }
+}
