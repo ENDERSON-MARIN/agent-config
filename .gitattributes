@@ -1,0 +1,3 @@
+# Normaliza LF em todos os clones (Windows/Unix): hashes dos manifestos
+# dependem de bytes estaveis, independente do SO.
+* text=auto eol=lf
