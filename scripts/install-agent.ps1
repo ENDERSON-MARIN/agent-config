@@ -84,4 +84,23 @@ foreach ($v in @("CONTEXT7_API_KEY", "RESEND_API_KEY", "CLOUDFLARE_API_TOKEN", "
   if ([string]::IsNullOrEmpty($val)) { Write-Output ("env ausente (ok se MCP segue disabled): " + $v) }
   else { Write-Output ("env ok: " + $v) }
 }
+
+$slock = Get-Content (Join-Path $Source "manifests/skills-lock.json") -Raw | ConvertFrom-Json
+$tlockPath = Join-Path $Target "skills-lock.json"
+$tlock = [pscustomobject]@{}
+if (Test-Path $tlockPath) {
+  $tlock = (Get-Content $tlockPath -Raw | ConvertFrom-Json).skills
+}
+foreach ($name in $slock.skills.PSObject.Properties.Name) {
+  $s = $slock.skills.$name
+  $pinned = ""
+  if ($tlock.PSObject.Properties.Name -contains $name) { $pinned = $tlock.$name.computedHash }
+  if (($pinned -eq $s.computedHash) -and (-not $Force)) { Write-Output ("skill skip (pineada): " + $name); continue }
+  if ($s.sourceType -ne "github") { Write-Output ("skill skip (sourceType nao suportado): " + $name); continue }
+  Push-Location $Target
+  & npx.cmd -y skills add ("https://github.com/" + $s.source) --skill $name --agent opencode -y
+  if ($LASTEXITCODE -ne 0) { Pop-Location; throw ("falha ao instalar skill: " + $name) }
+  Pop-Location
+  Write-Output ("skill ok: " + $name)
+}
 Write-Output ("concluido em " + $Target)

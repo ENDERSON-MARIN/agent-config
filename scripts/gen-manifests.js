@@ -17,11 +17,24 @@ const list = (dir, ext) =>
     : [];
 
 const skills = {};
+const lockPath = path.join(root, "manifests", "skills-lock.json");
+let external = {};
+if (fs.existsSync(lockPath)) {
+  try {
+    const prev = JSON.parse(fs.readFileSync(lockPath, "utf8")).skills || {};
+    // Preserva entradas externas (referencias a repos terceiros): so o lock
+    // local e regenerado; refs externas sao curadoria manual.
+    const localDirs = new Set(fs.existsSync(path.join(root, "skills")) ? fs.readdirSync(path.join(root, "skills")) : []);
+    for (const [k, v] of Object.entries(prev)) {
+      if (!localDirs.has(k)) external[k] = v;
+    }
+  } catch {}
+}
 for (const d of fs.existsSync(path.join(root, "skills")) ? fs.readdirSync(path.join(root, "skills")).sort() : []) {
   const f = path.join("skills", d, "SKILL.md");
   if (fs.existsSync(path.join(root, f))) skills[d] = { source, sourceType: "github", skillPath: f.replace(/\\/g, "/"), computedHash: sha(path.join(root, f)) };
 }
-fs.writeFileSync(path.join(root, "manifests", "skills-lock.json"), JSON.stringify({ version: 1, skills }, null, 2) + "\n");
+fs.writeFileSync(path.join(root, "manifests", "skills-lock.json"), JSON.stringify({ version: 1, skills: { ...external, ...skills } }, null, 2) + "\n");
 
 const section = (dir, ext) => {
   const assets = {};

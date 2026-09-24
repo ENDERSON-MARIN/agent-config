@@ -22,7 +22,7 @@ Opcoes: `-Ide opencode|vscode|all` (padrao `all`), `-Force` para sobrescrever ar
 | `mcp/base.opencode.json` | mescla `mcp`+`permission` no `opencode.json` | sim, deny-by-default |
 | `mcp/base.vscode.json` | `.vscode/mcp.json` | sim |
 | `rules/*` | templates para `AGENTS.md` / `.github/instructions/` | sim, router |
-| `skills/*/SKILL.md` | via `manifests/skills-lock.json` (lock do projeto) | sim, por description |
+| `skills/*/SKILL.md` | via `manifests/skills-lock.json` (instalador roda `npx skills add` por entrada) | sim, por description |
 
 ## Regras do central
 
