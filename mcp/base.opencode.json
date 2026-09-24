@@ -33,7 +33,8 @@
       "url": "https://mcp.brevo.com/v1/brevo/mcp",
       "headers": {
         "Authorization": "Bearer {env:BREVO_MCP_TOKEN}"
-      }
+      },
+      "enabled": false
     }
   },
   "permission": {
