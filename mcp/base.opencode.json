@@ -42,6 +42,13 @@
     "cloudflare_*": "deny",
     "mercadopago_*": "deny",
     "resend_*": "deny",
-    "brevo_*": "ask"
+    "brevo_*": "deny",
+    "brevo_transac_templates_send_transac_email": "ask",
+    "brevo_email_campaign_management_send_test_email": "ask",
+    "brevo_templates_send_test_template": "ask",
+    "brevo_contacts_get_contacts": "allow",
+    "brevo_contacts_get_contact_info": "allow",
+    "brevo_templates_get_smtp_templates": "allow",
+    "brevo_senders_get_senders": "allow"
   }
 }

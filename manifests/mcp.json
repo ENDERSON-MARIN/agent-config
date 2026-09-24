@@ -4,7 +4,7 @@
   "assets": {
     "base.opencode.json": {
       "path": "mcp/base.opencode.json",
-      "computedHash": "dd46a79965da941d1b2480ed88e249e1838f79dba5902f39b2f4a4e1e04b3ec3"
+      "computedHash": "b1a47096f0c7467189c6cb58827dd070ec6733bd8faa64b5b81718d05bb06481"
     },
     "base.vscode.json": {
       "path": "mcp/base.vscode.json",
