@@ -88,8 +88,11 @@ foreach ($v in @("CONTEXT7_API_KEY", "RESEND_API_KEY", "CLOUDFLARE_API_TOKEN", "
 $slock = Get-Content (Join-Path $Source "manifests/skills-lock.json") -Raw | ConvertFrom-Json
 $tlockPath = Join-Path $Target "skills-lock.json"
 $tlock = [pscustomobject]@{}
+$tver = $slock.version
 if (Test-Path $tlockPath) {
-  $tlock = (Get-Content $tlockPath -Raw | ConvertFrom-Json).skills
+  $tobj = (Get-Content $tlockPath -Raw | ConvertFrom-Json)
+  if ($tobj.skills) { $tlock = $tobj.skills }
+  if ($tobj.version) { $tver = $tobj.version }
 }
 foreach ($name in $slock.skills.PSObject.Properties.Name) {
   $s = $slock.skills.$name
@@ -101,6 +104,34 @@ foreach ($name in $slock.skills.PSObject.Properties.Name) {
   & npx.cmd -y skills add ("https://github.com/" + $s.source) --skill $name --agent opencode -y
   if ($LASTEXITCODE -ne 0) { Pop-Location; throw ("falha ao instalar skill: " + $name) }
   Pop-Location
-  Write-Output ("skill ok: " + $name)
+  # Sincroniza o pin central no lock do target: a CLI `skills` e dona nativa
+  # do skills-lock.json e pode reescrever o pin com o esquema dela; rele o
+  # arquivo, impoe o pin central e grava (LF, sem BOM) para skip/gcheck-updates convergirem.
+  $fresh = [pscustomobject]@{ version = $tver; skills = [pscustomobject]@{} }
+  if (Test-Path $tlockPath) { $fresh = (Get-Content $tlockPath -Raw | ConvertFrom-Json) }
+  if (-not $fresh.skills) { $fresh | Add-Member -NotePropertyName skills -NotePropertyValue ([pscustomobject]@{}) -Force }
+  $fresh.skills | Add-Member -NotePropertyName $name -NotePropertyValue $s -Force
+  $tlock = $fresh.skills
+  # Serializacao canonica (2 espacos, LF, sem BOM): ConvertTo-Json expande o
+  # alinhamento e polui o diff; o schema do lock e fixo e raso.
+  function LockEscape($v) { return ([string]$v).Replace("\", "\\").Replace('"', '\"') }
+  $L = New-Object System.Collections.Generic.List[string]
+  $L.Add("{")
+  $L.Add(('  "version": ' + $fresh.version + ','))
+  $L.Add('  "skills": {')
+  $names = @($fresh.skills.PSObject.Properties.Name)
+  for ($i = 0; $i -lt $names.Count; $i++) {
+    $e = $fresh.skills.($names[$i])
+    $L.Add(('    "' + (LockEscape $names[$i]) + '": {'))
+    $L.Add(('      "source": "' + (LockEscape $e.source) + '",'))
+    $L.Add(('      "sourceType": "' + (LockEscape $e.sourceType) + '",'))
+    $L.Add(('      "skillPath": "' + (LockEscape $e.skillPath) + '",'))
+    $L.Add(('      "computedHash": "' + (LockEscape $e.computedHash) + '"'))
+    if ($i -lt $names.Count - 1) { $L.Add('    },') } else { $L.Add('    }') }
+  }
+  $L.Add('  }')
+  $L.Add('}')
+  [System.IO.File]::WriteAllText($tlockPath, (($L -join "`n") + "`n"), [System.Text.UTF8Encoding]::new($false))
+  Write-Output ("skill ok: " + $name + " (pin sincronizado no lock do target)")
 }
 Write-Output ("concluido em " + $Target)
